@@ -1,0 +1,878 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #efefef;
+  color: #111;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  background: #000;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.hero-nav {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+
+  display: flex;
+  gap: 10px;
+
+  z-index: 10;
+}
+
+.hero-nav button {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+
+  padding: 9px 18px;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.hero-nav button:hover {
+  background: white;
+  color: black;
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   FEATURED WORK
+========================= */
+
+.projects-section {
+  width: min(1280px, 88%);
+
+  margin: 0 auto;
+
+  padding: 70px 0 100px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: 26px;
+  row-gap: 34px;
+}
+
+.projects-header {
+  grid-column: 1 / -1;
+
+  margin-bottom: 4px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.project-card {
+  position: relative;
+
+  width: 100%;
+  margin: 0;
+
+  overflow: hidden;
+
+  background: #111;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.16);
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+
+  background: #111;
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  filter: grayscale(100%);
+
+  transition:
+    filter 0.45s ease,
+    transform 0.45s ease;
+}
+
+.project-card:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(1.025);
+}
+
+
+/* =========================
+   PROJECT DARK OVERLAY
+========================= */
+
+.project-card::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.74) 0%,
+      rgba(0, 0, 0, 0.22) 40%,
+      rgba(0, 0, 0, 0) 70%
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* =========================
+   PROJECT TEXT OVER IMAGE
+========================= */
+
+.project-meta {
+  position: absolute;
+
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+
+  z-index: 2;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 20px;
+
+  padding: 0;
+
+  border: none;
+
+  color: white;
+}
+
+.project-number {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.15em;
+}
+
+.project-meta h2 {
+  margin: 0;
+
+  max-width: 420px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: clamp(20px, 2vw, 30px);
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+.project-details {
+  flex-shrink: 0;
+
+  text-align: right;
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+}
+
+.project-details p {
+  margin: 3px 0;
+}
+
+
+/* =========================
+   MODAL OVERLAY
+========================= */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 32px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  z-index: 1000;
+
+  overflow-y: auto;
+}
+
+
+/* =========================
+   PROJECT MODAL
+========================= */
+
+.modal {
+  position: relative;
+
+  width: min(1000px, 92vw);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #f4f4f4;
+  color: #111;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+.modal-close:hover {
+  background: white;
+  color: black;
+}
+
+
+/* =========================
+   MODAL IMAGE
+========================= */
+
+.modal-image-wrapper {
+  width: 100%;
+  background: black;
+}
+
+.modal-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* =========================
+   MODAL CONTENT
+========================= */
+
+.modal-content {
+  padding: 32px;
+}
+
+.modal-heading {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 30px;
+}
+
+.modal-category {
+  margin: 0 0 8px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.modal-heading h2 {
+  margin: 0;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: clamp(28px, 4vw, 48px);
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+.modal-year {
+  margin: 5px 0 0;
+  font-size: 12px;
+}
+
+
+/* =========================
+   CASE STUDY TEXT
+========================= */
+
+.project-intro {
+  max-width: 720px;
+
+  margin: 30px 0 40px;
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.project-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 30px;
+
+  padding: 24px 0;
+
+  margin-bottom: 38px;
+
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+}
+
+.info-label {
+  font-size: 9px;
+
+  letter-spacing: 0.18em;
+
+  color: #666;
+}
+
+.project-info-grid p {
+  margin: 7px 0 0;
+  font-size: 13px;
+}
+
+.case-study-text {
+  max-width: 700px;
+  margin-bottom: 50px;
+}
+
+.case-study-text p {
+  margin: 0 0 20px;
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+/* =========================
+   PROJECT LINK BUTTON
+========================= */
+
+.project-link {
+  display: inline-block;
+
+  margin-top: 12px;
+
+  padding: 10px 18px;
+
+  border: 1px solid #111;
+  border-radius: 999px;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.project-link:hover {
+  background: #111;
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   PROJECT EXTRA IMAGE GALLERY
+========================= */
+
+.project-gallery {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.project-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-gallery img:nth-child(3n) {
+  grid-column: span 2;
+}
+
+
+/* ==========================================
+   TOP NAV INFORMATION MODALS
+========================================== */
+
+.info-modal,
+.gallery-modal {
+  position: relative;
+
+  width: min(900px, 92vw);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #f4f4f4;
+  color: #111;
+
+  padding: 55px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.4);
+
+  animation: modalFade 0.3s ease;
+}
+
+.gallery-modal {
+  width: min(1100px, 94vw);
+}
+
+.info-close {
+  position: absolute;
+
+  top: 20px;
+  right: 22px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #111;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #111;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.info-close:hover {
+  background: #111;
+  color: white;
+}
+
+.panel-label {
+  margin: 0 0 15px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.panel-title {
+  margin: 0;
+
+  font-size: clamp(34px, 5vw, 64px);
+
+  line-height: 1.08;
+
+  font-weight: 400;
+}
+
+
+/* ==========================================
+   ABOUT
+========================================== */
+
+.about-copy {
+  max-width: 700px;
+  margin-top: 42px;
+}
+
+.about-copy p {
+  margin: 0 0 24px;
+
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.about-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 40px;
+
+  padding-top: 25px;
+
+  border-top: 1px solid #bbb;
+}
+
+.about-tags span {
+  padding: 7px 13px;
+
+  border: 1px solid #111;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+}
+
+
+/* ==========================================
+   LINKS
+========================================== */
+
+.links-modal {
+  width: min(760px, 92vw);
+}
+
+.links-list {
+  margin-top: 50px;
+
+  border-top: 1px solid #aaa;
+}
+
+.links-list a {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 22px 4px;
+
+  border-bottom: 1px solid #aaa;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-size: clamp(19px, 2.3vw, 28px);
+
+  transition:
+    padding 0.25s ease,
+    background 0.25s ease;
+}
+
+.links-list a:hover {
+  padding-left: 14px;
+  padding-right: 14px;
+
+  background: #111;
+
+  color: white;
+}
+
+
+/* ==========================================
+   OTHER WORK GALLERY
+========================================== */
+
+.gallery-header {
+  margin-bottom: 40px;
+}
+
+.gallery-description {
+  max-width: 500px;
+
+  margin: 18px 0 0;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  color: #555;
+}
+
+.other-work-gallery {
+  column-count: 2;
+  column-gap: 18px;
+}
+
+.gallery-item {
+  width: 100%;
+
+  margin-bottom: 18px;
+
+  break-inside: avoid;
+
+  overflow: hidden;
+
+  background: #ddd;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.02);
+}
+
+
+/* ==========================================
+   MODAL ANIMATION
+========================================== */
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .hero-nav {
+    top: 12px;
+    right: 12px;
+
+    gap: 5px;
+  }
+
+  .hero-nav button {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .projects-section {
+    width: 92%;
+
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+
+    padding: 50px 0 70px;
+  }
+
+  .projects-header {
+    margin-bottom: 5px;
+  }
+
+  .project-card {
+    width: 100%;
+  }
+
+  .project-image-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-meta {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+
+    flex-direction: row;
+
+    align-items: flex-end;
+
+    gap: 12px;
+  }
+
+  .project-meta h2 {
+    font-size: 20px;
+  }
+
+  .project-details {
+    text-align: right;
+    font-size: 8px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: 94vh;
+  }
+
+  .modal-content {
+    padding: 22px 18px;
+  }
+
+  .modal-heading {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .project-intro {
+    font-size: 16px;
+  }
+
+  .project-info-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .project-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .project-gallery img:nth-child(3n) {
+    grid-column: span 1;
+  }
+
+  .info-modal,
+  .gallery-modal {
+    width: 100%;
+
+    padding:
+      55px
+      20px
+      30px;
+  }
+
+  .about-copy p {
+    font-size: 14px;
+  }
+
+  .links-list a {
+    font-size: 18px;
+  }
+
+  .other-work-gallery {
+    column-count: 1;
+  }
+
+}
