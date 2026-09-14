@@ -527,7 +527,7 @@ function App() {
             <div className="links-list">
 
               <a
-                href="/resume.pdf"
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
